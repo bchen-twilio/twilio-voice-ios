@@ -1,3 +1,11 @@
+# Initial Setup
+
+You'll need a public github project to own the releases for Carthage to consume using this approach.  Create a new repository and add at least a README to the project.
+
+I am using the `hub` command line tool for publishing the release, it can be installed with `brew install hub`.
+
+Last, you'll need a configuration specified in the configs/ directory.
+
 # Producing
 
         ./distribute-for-carthage.sh <config>
