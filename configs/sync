@@ -1,6 +1,0 @@
-VERSION="0.6.0"
-PRODUCT_KEY="sync"
-PRODUCT_NAME="Sync"
-DEST="TwilioSyncClient.framework.zip"
-GIT_REPOS="git@github.com:rbeiter/twilio-${PRODUCT_KEY}-ios.git"
-SOURCE="twilio-${PRODUCT_KEY}-ios-${VERSION}.tar.bz2"

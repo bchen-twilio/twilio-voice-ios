@@ -1,6 +1,0 @@
-VERSION="1.0.0"
-PRODUCT_KEY="accessmanager"
-PRODUCT_NAME="Access Manager"
-DEST="TwilioAccessManager.framework.zip"
-GIT_REPOS="git@github.com:rbeiter/twilio-${PRODUCT_KEY}-ios.git"
-SOURCE="twilio-${PRODUCT_KEY}-ios-${VERSION}.tar.bz2"

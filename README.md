@@ -8,10 +8,34 @@ Last, you'll need a configuration specified in the configs/ directory.
 
 # Producing
 
-    ./distribute-for-carthage.sh <config>
+    ./distribute-for-carthage.sh <owner> <repos> <ref> <env> <version>
 
-Where config is the name of a file in the configs/ directory.  Samples exist
-there.
+    owner - The code.hq.twilio.com organization, e.g. 'client'
+    repos - The code.hq.twilio.com project, e.g. 'twilio-chat-ios'
+    ref - The git ref, e.g. 'master' or 'release-1.0.0'
+    env - An environment, e.g. 'prod' or 'stage'
+    verison - The version to release as, e.g. '1.0.0' or '2.0.0-rc1'
+
+At least two config files must live in your project, carthage.config and at least one carthage-<env>.config.
+
+In carthage.config, the expected variables defined are along the lines of:
+
+    PRODUCT_KEY="accessmanager" # lower case product name, e.g. accessmanager, chat, sync, video, voice
+    PRODUCT_NAME="Access Manager" # human readable name, used for git release comment
+    DEST_FILENAME="TwilioAccessManager.framework.zip" # eventual filename for carthage zip file, recomended as frameworkname.zip
+    SOURCE="twilio-${PRODUCT_KEY}-ios-${RELEASE_VERSION}.tar.bz2" # the filename pattern distributed to the cdn that will be downloaded
+
+In each carthage-<env>.config, you will declare the destination github repository for the release and the CDN path to obtain the release from.
+
+An example carthage-prod.config is:
+
+    DEST_GIT_REPOS="git@github.com:twilio/twilio-${PRODUCT_KEY}-ios.git"
+    CDN_URL="https://media.twiliocdn.com/sdk/ios/${PRODUCT_KEY}/releases/${RELEASE_VERSION}/${SOURCE}"
+
+An example carthage-stage.config is:
+
+    DEST_GIT_REPOS="git@github.com:twilio/twilio-${PRODUCT_KEY}-ios-internal.git"
+    CDN_URL="https://stage.twiliocdn.com/sdk/ios/${PRODUCT_KEY}/releases/${RELEASE_VERSION}/${SOURCE}"
 
 At the moment, hub will create a draft release so it can be examined before
 fully releasing.  We can make this optional or make it always release
