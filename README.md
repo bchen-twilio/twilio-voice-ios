@@ -42,3 +42,15 @@ Boostrap carthage:
     carthage bootstrap
 
 Since Carthage only manages versions and the download of the framework, not integration of it, you'll need to complete the process using the manual integration steps found at:  https://www.twilio.com/docs/api/chat/sdks#manual-integration
+
+Internal RC's:
+
+Internal RC's can be supported by distributing to a private github repository.  The release gets published the same way but instead of the github lines specified above, the following is used:
+
+This requires the username and password (or [auth token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)) to either be included in the Cartfile as part of the url "user:pass@github.com" or previously stored in the keychain:
+
+    git config --global credential.helper osxkeychain
+    git checkout https://github.com/...
+    # log in using username and password or username and auth token
+
+From this point, carthage should use your keychain for the credentials.
