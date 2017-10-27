@@ -8,7 +8,7 @@ Last, you'll need a configuration specified in the configs/ directory.
 
 # Producing
 
-        ./distribute-for-carthage.sh <config>
+    ./distribute-for-carthage.sh <config>
 
 Where config is the name of a file in the configs/ directory.  Samples exist
 there.
@@ -21,24 +21,24 @@ immediately.
 
 Download the Chat iOS Demo application:
 
-        wget https://github.com/twilio/twilio-chat-demo-ios/archive/master.zip
+    wget https://github.com/twilio/twilio-chat-demo-ios/archive/master.zip
 
 Create a Cartfile:
 
-        cat > Cartfile << _DONE_
-        github "rbeiter/twilio-chat-ios"
-        github "rbeiter/twilio-accessmanager-ios"
-        _DONE_
+    cat > Cartfile << _DONE_
+    github "rbeiter/twilio-chat-ios"
+    github "rbeiter/twilio-accessmanager-ios"
+    _DONE_
 
 Or for Sync:
 
-        cat > Cartfile << _DONE_
-        github "rbeiter/twilio-sync-ios"
-        _DONE_
+    cat > Cartfile << _DONE_
+    github "rbeiter/twilio-sync-ios"
+    _DONE_
 
 Boostrap carthage:
 
-        brew install carthage # if needed
-        carthage bootstrap
+    brew install carthage # if needed
+    carthage bootstrap
 
 Since Carthage only manages versions and the download of the framework, not integration of it, you'll need to complete the process using the manual integration steps found at:  https://www.twilio.com/docs/api/chat/sdks#manual-integration
