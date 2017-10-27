@@ -1,0 +1,6 @@
+VERSION="2.0.1"
+PRODUCT_KEY="chat"
+PRODUCT_NAME="Chat"
+DEST="TwilioChatClient.framework.zip"
+GIT_REPOS="git@github.com:rbeiter/twilio-${PRODUCT_KEY}-ios.git"
+SOURCE="twilio-${PRODUCT_KEY}-ios-${VERSION}.tar.bz2"
