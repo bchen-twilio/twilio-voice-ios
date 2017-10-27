@@ -25,7 +25,7 @@ In carthage.config, the expected variables defined are along the lines of:
     DEST_FILENAME="TwilioAccessManager.framework.zip" # eventual filename for carthage zip file, recomended as frameworkname.zip
     SOURCE="twilio-${PRODUCT_KEY}-ios-${RELEASE_VERSION}.tar.bz2" # the filename pattern distributed to the cdn that will be downloaded
 
-In each carthage-<env>.config, you will declare the destination github repository for the release and the CDN path to obtain the release from.
+In each carthage-&lt;env&gt;.config, you will declare the destination github repository for the release and the CDN path to obtain the release from.
 
 An example carthage-prod.config is:
 
