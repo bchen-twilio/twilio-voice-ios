@@ -8,7 +8,17 @@ Last, you'll need a configuration specified in the configs/ directory.
 
 # Producing
 
-    ./distribute-for-carthage.sh <owner> <repos> <ref> <env> <version>
+Publishing a release requires authenticating with github (or code.hq).  To do this, we will use github auth tokens.  To create one, visit one of the following URLs:
+
+[code.hq](https://code.hq.twilio.com/settings/tokens/new)
+
+[github](https://github.com/settings/tokens/new)
+
+And create a new token with only the `repo` checkbox ticked.
+
+Distributing a release:
+
+    OAUTH_TOKEN=<token_from_above> ./distribute-for-carthage.sh <owner> <repos> <ref> <env> <version>
 
     owner - The code.hq.twilio.com organization, e.g. 'client'
     repos - The code.hq.twilio.com project, e.g. 'twilio-chat-ios'
@@ -16,7 +26,7 @@ Last, you'll need a configuration specified in the configs/ directory.
     env - An environment, e.g. 'prod' or 'stage'
     verison - The version to release as, e.g. '1.0.0' or '2.0.0-rc1'
 
-At least two config files must live in your project, carthage.config and at least one carthage-<env>.config.
+At least two config files must live in your project, carthage.config and at least one `carthage-<env>.config`.
 
 In carthage.config, the expected variables defined are along the lines of:
 
@@ -50,14 +60,14 @@ Download the Chat iOS Demo application:
 Create a Cartfile:
 
     cat > Cartfile << _DONE_
-    github "rbeiter/twilio-chat-ios"
-    github "rbeiter/twilio-accessmanager-ios"
+    github "twilio/twilio-chat-ios"
+    github "twilio/twilio-accessmanager-ios"
     _DONE_
 
 Or for Sync:
 
     cat > Cartfile << _DONE_
-    github "rbeiter/twilio-sync-ios"
+    github "twilio/twilio-sync-ios"
     _DONE_
 
 Boostrap carthage:
@@ -71,10 +81,16 @@ Internal RC's:
 
 Internal RC's can be supported by distributing to a private github repository.  The release gets published the same way but instead of the github lines specified above, the following is used:
 
-This requires the username and password (or [auth token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)) to either be included in the Cartfile as part of the url "user:pass@github.com" or previously stored in the keychain:
+    cat > Cartfile << _DONE_
+    github "twilio/twilio-chat-ios-internal"
+    github "twilio/twilio-accessmanager-ios-internal"
+    _DONE_
+
+This requires the username and [auth token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) to either be included in the Cartfile as part of the url "user:pass@github.com" or previously stored in the keychain:
 
     git config --global credential.helper osxkeychain
-    git checkout https://github.com/...
-    # log in using username and password or username and auth token
+    git clone https://github.com/<anyproject> /tmp/anyproject-temp # this is just to force github to authenticate you
+    # log in using username and auth token, the auth token is the same as is generated above as part of the producing step.
 
-From this point, carthage should use your keychain for the credentials.
+From this point, carthage should use your keychain for the credentials and your `carthage bootstrap` should work.
+
