@@ -16,13 +16,22 @@ export GITHUB_REF="${3}"
 export RELEASE_ENV="${4}"
 export RELEASE_VERSION="${5}"
 
+export SOURCE_TYPE="${SOURCE_TYPE:-codehq}"
+
 rm -rf tmp
 mkdir tmp
 
 cd tmp
 
 for CONFIG_FILENAME in "carthage.config" "carthage-${RELEASE_ENV}.config"; do
-  export DOWNLOAD_URL="https://code.hq.twilio.com/api/v3/repos/${GITHUB_OWNER}/${GITHUB_REPOSITORY}/contents/${CONFIG_FILENAME}?ref=${GITHUB_REF}"
+  if [ "${SOURCE_TYPE}" -eq "codehq" ]; then
+    export DOWNLOAD_URL="https://code.hq.twilio.com/api/v3/repos/${GITHUB_OWNER}/${GITHUB_REPOSITORY}/contents/${CONFIG_FILENAME}?ref=${GITHUB_REF}"
+  elif [ "${SOURCE_TYPE}" -eq "github" ]; then
+    export DOWNLOAD_URL="https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPOSITORY}/contents/${CONFIG_FILENAME}?ref=${GITHUB_REF}"
+  else
+    echo "Unknown SOURCE_TYPE '${SOURCE_TYPE}'"
+    exit 1
+  fi
   curl -H "Authorization: token ${GITHUB_OAUTH_TOKEN}" -H 'Accept: application/vnd.github.v3.raw' -o ${CONFIG_FILENAME} -L ${DOWNLOAD_URL}
   if [ -f "${CONFIG_FILENAME}" ]; then
     source "${CONFIG_FILENAME}"
