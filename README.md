@@ -18,13 +18,16 @@ And create a new token with only the `repo` checkbox ticked.
 
 Distributing a release:
 
-    OAUTH_TOKEN=<token_from_above> ./distribute-for-carthage.sh <owner> <repos> <ref> <env> <version>
-
+    GITHUB_OAUTH_TOKEN=<token_from_above> ./distribute-for-carthage.sh <owner> <repos> <ref> <env> <version>
+    
     owner - The code.hq.twilio.com organization, e.g. 'client'
     repos - The code.hq.twilio.com project, e.g. 'twilio-chat-ios'
     ref - The git ref, e.g. 'master' or 'release-1.0.0'
     env - An environment, e.g. 'prod' or 'stage'
     verison - The version to release as, e.g. '1.0.0' or '2.0.0-rc1'
+    
+    Example:
+    GITHUB_OAUTH_TOKEN=<code-hq-token> ./distribute-for-carthage.sh client video-ios 2.0 prod 2.0.0-preview8
 
 At least two config files must live in your project, carthage.config and at least one `carthage-<env>.config`.
 
