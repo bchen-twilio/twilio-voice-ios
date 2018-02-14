@@ -27,7 +27,7 @@ Distributing a release:
     verison - The version to release as, e.g. '1.0.0' or '2.0.0-rc1'
     
     Example:
-    GITHUB_OAUTH_TOKEN=<code-hq-token> ./distribute-for-carthage.sh client video-ios 2.0 prod 2.0.0-preview8
+    GITHUB_OAUTH_TOKEN=<code-hq-token> ./distribute-for-carthage.sh client voice-ios 2.0 prod 2.0.0-preview8
 
 At least two config files must live in your project, carthage.config and at least one `carthage-<env>.config`.
 

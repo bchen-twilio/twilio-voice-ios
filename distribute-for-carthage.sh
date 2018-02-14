@@ -24,14 +24,7 @@ mkdir tmp
 cd tmp
 
 for CONFIG_FILENAME in "carthage.config" "carthage-${RELEASE_ENV}.config"; do
-  if [ "${SOURCE_TYPE}" = "codehq" ]; then
-    export DOWNLOAD_URL="https://code.hq.twilio.com/api/v3/repos/${GITHUB_OWNER}/${GITHUB_REPOSITORY}/contents/${CONFIG_FILENAME}?ref=${GITHUB_REF}"
-  elif [ "${SOURCE_TYPE}" = "github" ]; then
-    export DOWNLOAD_URL="https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPOSITORY}/contents/${CONFIG_FILENAME}?ref=${GITHUB_REF}"
-  else
-    echo "Unknown SOURCE_TYPE '${SOURCE_TYPE}'"
-    exit 1
-  fi
+  export DOWNLOAD_URL="https://code.hq.twilio.com/api/v3/repos/${GITHUB_OWNER}/${GITHUB_REPOSITORY}/contents/README.md?ref=${GITHUB_REF}"
   curl -H "Authorization: token ${GITHUB_OAUTH_TOKEN}" -H 'Accept: application/vnd.github.v3.raw' -o ${CONFIG_FILENAME} -L ${DOWNLOAD_URL}
   if [ -f "${CONFIG_FILENAME}" ]; then
     source "${CONFIG_FILENAME}"
