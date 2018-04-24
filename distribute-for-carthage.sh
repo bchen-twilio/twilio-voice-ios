@@ -58,6 +58,6 @@ cd ..
 
 git clone ${DEST_GIT_REPOS} git
 cd git
-hub release create -d -a ../${DEST_FILENAME} -m "Releasing Twilio ${PRODUCT_NAME} iOS ${RELEASE_VERSION}" v${RELEASE_VERSION}
+hub release create -d -a ../${DEST_FILENAME} -m "Releasing Twilio ${PRODUCT_NAME} iOS ${RELEASE_VERSION}" ${RELEASE_VERSION}
 cd ..
 
